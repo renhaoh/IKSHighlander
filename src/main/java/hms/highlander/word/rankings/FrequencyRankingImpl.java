@@ -44,11 +44,11 @@ public class FrequencyRankingImpl implements FrequencyRanking {
         try {
             Reader in = new FileReader(inputPath);
             Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath));
             for (CSVRecord record : records) {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath));
                 writer.write(record.get(colNum) + "\n");
-                writer.close();
             }
+            writer.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

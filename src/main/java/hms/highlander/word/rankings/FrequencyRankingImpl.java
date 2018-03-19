@@ -1,6 +1,5 @@
 package hms.highlander.word.rankings;
 
-
 import com.kennycason.kumo.WordFrequency;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
 import com.kennycason.kumo.nlp.normalize.LowerCaseNormalizer;
@@ -16,7 +15,7 @@ public class FrequencyRankingImpl implements FrequencyRanking {
 
     @Override
     public String generateRanking(String inputPath, int colNum, int numValues) {
-        String outputPath = "tmp/" + FilenameUtils.getName(inputPath);
+        String outputPath = "tmp/" + (FilenameUtils.getName(inputPath).split("\\.")[0]) + ".txt";
 
         final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
         frequencyAnalyzer.setWordFrequenciesToReturn(numValues);

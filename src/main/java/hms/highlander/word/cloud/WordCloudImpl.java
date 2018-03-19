@@ -12,14 +12,13 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
-
 /**
  * Utilize library from https://github.com/kennycason/kumo
  */
 public class WordCloudImpl implements WordCloud {
 
     @Override
-    public void generateCloud(String outputPath, int width, int height, String text) {
+    public void generateCloud(String outputPath, int width, int height, String inputPath) {
         final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
         frequencyAnalyzer.setWordFrequenciesToReturn(150);
         frequencyAnalyzer.setMinWordLength(3);
@@ -28,7 +27,8 @@ public class WordCloudImpl implements WordCloud {
 
         try {
             final List<WordFrequency> wordFrequencies =
-                frequencyAnalyzer.load(text);
+                frequencyAnalyzer.load(inputPath);
+
             final Dimension dimension = new Dimension(width, height);
             final com.kennycason.kumo.WordCloud wordCloud =
                 new com.kennycason.kumo.WordCloud(dimension, CollisionMode.PIXEL_PERFECT);

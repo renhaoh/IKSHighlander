@@ -12,4 +12,6 @@ repositories {
 
 dependencies {
     compile group: 'com.kennycason', name: 'kumo-core', version: '1.13'
+    compile group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
+    compile group: 'org.apache.commons', name: 'commons-io', version: '2.6'
 }

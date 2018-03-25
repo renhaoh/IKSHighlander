@@ -3,8 +3,19 @@ version '1.0'
 
 apply plugin: 'maven'
 apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
 
 sourceCompatibility = 1.8
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        //This is necessary to use the gradle shadow plugin
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
+    }
+}
 
 repositories {
     mavenCentral()
@@ -13,5 +24,11 @@ repositories {
 dependencies {
     compile group: 'com.kennycason', name: 'kumo-core', version: '1.13'
     compile group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
-    compile group: 'org.apache.commons', name: 'commons-io', version: '2.6'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'hms.highlander.rankings.RunFrequencyRank'
+    }
 }

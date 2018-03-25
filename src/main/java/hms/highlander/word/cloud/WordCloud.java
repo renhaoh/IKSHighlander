@@ -4,11 +4,11 @@ public interface WordCloud {
 
     /**
      * Generates a circular WordCloud.
-     * @param outputPath output path for .png file
-     * @param width 1200 recommended
-     * @param height 1200 recommended
      * @param inputPath path of text to analyze
+     * @param outputPath output path for .png file
+     * @param width 600 recommended
+     * @param height 600 recommended
      */
-    void generateCloud(String outputPath, int width, int height, String inputPath);
+    void generateCloud(String inputPath, String outputPath, int width, int height);
 
 }

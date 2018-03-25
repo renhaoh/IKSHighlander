@@ -1,11 +1,14 @@
 package hms.highlander.word.utilities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ParseStopWords {
 
     // Words from https://www.ranks.nl/stopwords
+    static List<String> list;
+
     final static String words = "a\n" +
         "able\n" +
         "about\n" +
@@ -673,6 +676,9 @@ public class ParseStopWords {
         "zero";
 
     public static List<String> getStopWords() {
-        return Arrays.asList(words.split("\n"));
+        if (list == null) {
+            list = Arrays.asList(words.split("\n"));
+        }
+        return list;
     }
 }

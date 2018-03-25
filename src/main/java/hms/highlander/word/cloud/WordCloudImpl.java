@@ -18,7 +18,7 @@ import java.util.List;
 public class WordCloudImpl implements WordCloud {
 
     @Override
-    public void generateCloud(String outputPath, int width, int height, String inputPath) {
+    public void generateCloud(String inputPath, String outputPath, int width, int height) {
         final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
         frequencyAnalyzer.setWordFrequenciesToReturn(150);
         frequencyAnalyzer.setMinWordLength(3);

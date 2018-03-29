@@ -17,10 +17,12 @@ import java.util.List;
  */
 public class WordCloudImpl implements WordCloud {
 
+    private static int NUM_WORDS = 300;
+
     @Override
     public void generateCloud(String inputPath, String outputPath, int width, int height) {
         final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
-        frequencyAnalyzer.setWordFrequenciesToReturn(150);
+        frequencyAnalyzer.setWordFrequenciesToReturn(NUM_WORDS);
         frequencyAnalyzer.setMinWordLength(3);
         frequencyAnalyzer.setStopWords(ParseStopWords.getStopWords());
         frequencyAnalyzer.addNormalizer(new LowerCaseNormalizer());

@@ -19,31 +19,30 @@ public class FrequencyRankingImpl implements FrequencyRanking {
     final String IGNORE_INPUT = "NONE";
 
     @Override
-    public String generateRanking(String inputPath, int colNum, int numValues, String mission, String grade, String
+    public void generateRanking(String inputPath, int colNum, int numValues, String mission, String grade, String
         id) {
-        String outputPath = "tmp/" + (FilenameUtils.getName(inputPath).split("\\.")[0]) + " " + colNum + ".txt";
+        String tmpPath = "tmp/" + (FilenameUtils.getName(inputPath).split("\\.")[0]) + " " + colNum + ".txt";
+        String outputPath = "output/" + (FilenameUtils.getName(inputPath).split("\\.")[0]) + " " + colNum + ".txt";
 
         final FrequencyAnalyzer frequencyAnalyzer = new FrequencyAnalyzer();
         frequencyAnalyzer.setWordFrequenciesToReturn(numValues);
         frequencyAnalyzer.setMinWordLength(3);
         frequencyAnalyzer.setStopWords(ParseStopWords.getStopWords());
         frequencyAnalyzer.addNormalizer(new LowerCaseNormalizer());
-        StringBuilder builder = new StringBuilder();
-        generateInput(inputPath, outputPath, colNum, mission, grade, id);
+        generateInput(inputPath, tmpPath, colNum, mission, grade, id);
+
         try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath, false));
             final List<WordFrequency> wordFrequencies =
-                frequencyAnalyzer.load(outputPath);
+                frequencyAnalyzer.load(tmpPath);
+            System.out.println(wordFrequencies.size());
             for (WordFrequency freq : wordFrequencies) {
-                builder.append(freq.getWord()).append(":").append(freq.getFrequency()).append(",");
+                writer.write(freq.getWord() + ":" + freq.getFrequency() + "\n");
             }
-            if (builder.length() > 0) {
-                builder.setLength(builder.length() - 1);
-            }
-            return builder.toString();
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return builder.toString();
     }
 
     private void generateInput(String inputPath, String outputPath, int colNum, String mission, String grade, String
@@ -51,7 +50,7 @@ public class FrequencyRankingImpl implements FrequencyRanking {
         try {
             Reader in = new FileReader(inputPath);
             Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
-            BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath, false));
             for (CSVRecord record : records) {
                 if ((mission.equals(IGNORE_INPUT) || mission.equals(record.get(MISSION_COL))) &&
                     (grade.equals(IGNORE_INPUT) || grade.equals(record.get(GRADE_COL))) &&

@@ -12,5 +12,5 @@ public interface FrequencyRanking {
      * @param id student id; input NONE to ignore
      * @return String representing comma-delimited values in the form of "word:frequency"
      */
-    String generateRanking(String inputPath, int colNum, int numValues, String mission, String grade, String id);
+    void generateRanking(String inputPath, int colNum, int numValues, String mission, String grade, String id);
 }

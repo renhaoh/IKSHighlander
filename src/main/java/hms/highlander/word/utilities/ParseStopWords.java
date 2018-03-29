@@ -1,6 +1,5 @@
 package hms.highlander.word.utilities;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -304,6 +303,7 @@ public class ParseStopWords {
         "might\n" +
         "million\n" +
         "miss\n" +
+        "mission\n" +
         "ml\n" +
         "more\n" +
         "moreover\n" +

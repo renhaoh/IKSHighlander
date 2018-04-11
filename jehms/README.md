@@ -3,7 +3,10 @@ npm version 5.0.0 or greater - download from [here](https://www.npmjs.com/get-np
 postgres - download from [here](https://www.postgresql.org/download/)
 
 
-# How to run (assuming linux-like OS)
+# How to run
+(assuming linux-like OS)  
+  
+
 Setup Postgres Database Instance:
 ```
 pg_ctl -D /usr/local/var/postgres start

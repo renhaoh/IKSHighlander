@@ -7,7 +7,7 @@ postgres - download from [here](https://www.postgresql.org/download/)
 (assuming linux-like OS)  
   
 
-Setup Postgres Database Instance:
+### Setup Postgres Database Instance:
 ```
 pg_ctl -D /usr/local/var/postgres start
 
@@ -26,12 +26,12 @@ pg_ctl -D /usr/local/var/postgres start
 if you do not want to run postgres on startup.
 
 
-Install necessary packages:
+### Install necessary packages:
 ```
 npm install
 ```
 
-Start application:
+### Start application:
 ```
 npm start
 ```

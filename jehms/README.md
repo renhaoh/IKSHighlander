@@ -1,5 +1,5 @@
 # Pre-requisites
-npm version 5.0.0 or greater - download from [here](https://www.npmjs.com/get-npm)
+npm version 5.0.0 or greater - download from [here](https://www.npmjs.com/get-npm)  
 postgres - download from [here](https://www.postgresql.org/download/)
 
 

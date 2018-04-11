@@ -1,7 +1,7 @@
 var http = require('http');
 var express = require('express');
 var logger = require('morgan');
-
+var db = require('./db');
 var app = express();
 var server = http.Server(app);
 

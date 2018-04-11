@@ -6,14 +6,24 @@ var app = angular.module('app', [
   'ui.materialize'
 ]);
 
-app.controller("landing_ctl", landing_ctl);
+// Register global methods for authentication check
+app.factory("$globs", globs);
+
+// Register controllers
+app.controller("login_ctl", login_ctl);
+app.controller("home_ctl", home_ctl);
 app.controller("charts_ctl", charts_ctl);
 app.controller("general_data_ctl", general_data_ctl);
 
+// Register routes with respective templates and controllers
 app.config(function($routeProvider) {
 	$routeProvider.when("/", {
-      templateUrl: "html/landing.html",
-      controller: "landing_ctl"
+      templateUrl: "html/login.html",
+      controller: "login_ctl"
+  });
+  $routeProvider.when("/home", {
+      templateUrl: "html/home.html",
+      controller: "home_ctl"
   });
   $routeProvider.when("/charts", {
       templateUrl: "html/charts.html",

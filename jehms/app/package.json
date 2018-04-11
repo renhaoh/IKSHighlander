@@ -18,11 +18,10 @@
     "protractor": "^4.0.9"
   },
   "scripts": {
-    "express": "^4.14.0",
     "postinstall": "bower install",
     "update-deps": "npm update",
     "postupdate-deps": "bower update",
-    "prestart": "npm install",
+    "prestart": "NODE_ENV=development ./bin/prestart_checks",
     "start": "DEBUG=app:* NODE_ENV=development supervisor --ignore static ./bin/www",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
@@ -35,6 +34,10 @@
   },
   "dependencies": {
     "express": "^4.16.3",
-    "morgan": "^1.7.0"
+    "google-auth-library": "^1.4.0",
+    "googleapis": "^27.0.0",
+    "morgan": "^1.7.0",
+    "pg": "^6.1.2",
+    "knex": "^0.12.6"
   }
 }

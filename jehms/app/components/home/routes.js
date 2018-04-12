@@ -105,3 +105,28 @@ router.get('/get_match', function(req, res, next) {
     }
   });
 }); 
+
+// Get random number of student responses for display purposes
+router.get('/get_random', function(req, res, next) {
+  var col = req.query.col;
+  var num = req.query.num;
+  return db.select('*')
+  .from(tableName)
+  // https://stackoverflow.com/questions/1117761/return-rows-in-random-order
+  .orderBy('NEWID()')
+  .limit(num)
+  .then(function(rows) {
+    val arr = [];
+    for (var i = 0; i < rows.length; i++) {
+      arr.push(rows[i])[col];
+    }
+    return res.send(arr);
+  })
+  .catch(function(err) {
+    if (err.name === 'GetRandomException') {
+      return res.status(400).send(err);
+    } else {
+      next(err);
+    }
+  });
+});

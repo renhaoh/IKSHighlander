@@ -23,9 +23,9 @@ Note: it is worthwhile setting up a macro to run
 ```
 pg_ctl -D /usr/local/var/postgres start
 ```
-if you do not want to run postgres on startup.
-
-
+if you do not want to run postgres on startup of your machine.  
+  
+Navigate to the /app directory before moving on to the next steps.
 ### Install necessary packages:
 ```
 npm install

@@ -2,10 +2,10 @@ var home_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootScope, $h
 	$scope.name = "home";
 
 	$scope.get_all_responses = function () {
-		$http.get("/api/home/get_all").then(function(success) {
+		$http.get("/api/home/word_cloud").then(function(success) {
 			$scope.responses = success.data;
 		}, function(fail) {
-			Materialize.toast('Error getting responses', 5000);
+			Materialize.toast('Error getting word cloud', 5000);
 		});
 	}
 	$scope.get_all_responses();

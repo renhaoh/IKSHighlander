@@ -1,14 +1,28 @@
 var router = require('express').Router();
-var tableName = 'responses'
+var pre = 'pre_responses';
+var post = 'post_responses';
 var validate = require('express-jsonschema').validate;
 var db = require('../../db');
 var tools = require('./parse.js');
 var exec = require('child_process').exec;
 
-// Get all student responses
-router.get('/get_all', function(req, res, next) {
+// Get all pre survey student responses
+router.get('/get_all_pre', function(req, res, next) {
   return db.select('*')
-  .from(tableName)
+  .from(pre)
+  .orderBy('id')
+  .then(function(responses) {
+    return res.send(responses);
+  })
+  .catch(function(err) {
+      return res.status(400).send(err);
+  });
+});
+
+// Get all post survey student responses
+router.get('/get_all_post', function(req, res, next) {
+  return db.select('*')
+  .from(post)
   .orderBy('id')
   .then(function(responses) {
     return res.send(responses);
@@ -24,11 +38,11 @@ router.get('/get_all', function(req, res, next) {
 
 // Generate the word cloud, which will be wordcloud/cloud.png
 router.get('/word_cloud', function(req, res, next) {
-	exec('./script.sh', function(err, stdout, stderr) {
+	exec('sh ./static/nonjs/script.sh', function(err, stdout, stderr) {
 		console.log('stdout: ' + stdout);
     console.log('stderr: ' + stderr);
-    if (error !== null) {
-        console.log('exec error: ' + error);
+    if (err !== null) {
+        console.log('exec error: ' + err);
     } else {
     	return res.send('written to wordlcoud/cloud.png')
     }
@@ -36,7 +50,7 @@ router.get('/word_cloud', function(req, res, next) {
 });
 
 // Get a particular student's responses
-router.get('/get_all', function(req, res, next) {
+router.get('/get_student', function(req, res, next) {
 	var id = req.query.id;
   return db.select('*')
   .from(tableName)

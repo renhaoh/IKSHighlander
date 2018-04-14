@@ -40,8 +40,8 @@ router.get('/get_all', function(req, res, next) {
 	var id = req.query.id;
   return db.select('*')
   .from(tableName)
-  .where('id', id);
-  .orderBy('time', 'desc');
+  .where('id', id)
+  .orderBy('time', 'desc')
   .then(function(responses) {
     return res.send(responses);
   })
@@ -71,8 +71,8 @@ router.get('/get_match', function(req, res, next) {
 	}
 	return db.select('*')
   .from(tableName)
-  .where('mission', mission);
-  .whereBetween('grade', grade);
+  .where('mission', mission)
+  .whereBetween('grade', grade)
   .orderBy('time', 'desc')
   .then(function(rows) {
   	var colVals = {};
@@ -83,7 +83,7 @@ router.get('/get_match', function(req, res, next) {
     	for (var j = 0; j < cols.length; j++) {
     		var specCol = cols[j];
     		var str = element[specCol];
-    		if !(specCol in colVals) {
+    		if (!(specCol in colVals)) {
     			colVals[specCol] = str;
     		} else {
     			colVals[specCol] = colVals[specCol] + str;
@@ -116,7 +116,7 @@ router.get('/get_random', function(req, res, next) {
   .orderBy('NEWID()')
   .limit(num)
   .then(function(rows) {
-    val arr = [];
+    var arr = [];
     for (var i = 0; i < rows.length; i++) {
       arr.push(rows[i])[col];
     }
@@ -130,3 +130,5 @@ router.get('/get_random', function(req, res, next) {
     }
   });
 });
+
+module.exports = router;

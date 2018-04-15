@@ -20,8 +20,8 @@ import java.util.regex.Pattern;
 public class WordCloudImpl implements WordCloud {
     private static final int WIDTH = 600;
     private static final int HEIGHT = 600;
-    private static final String OUTPUT_PATH = "static/nonjs/wordcloud/wordcloud/cloud.png";
-    private static final String INPUT_PATH = "static/nonjs/wordcloud/wordcloud/responses.txt";
+    private static final String OUTPUT_PATH = "static/nonjs/wordcloud/cloud.png";
+    private static final String INPUT_PATH = "static/nonjs/wordcloud/responses.txt";
     private static final int NUM_WORDS = 300;
 
     @Override

@@ -1,0 +1,24 @@
+
+<div id="highcharts-361f7803-7f51-4347-9c9d-5f795a6162ef"></div><script>
+(function(){ var files = ["https://code.highcharts.com/stock/highstock.js","https://code.highcharts.com/highcharts-more.js","https://code.highcharts.com/highcharts-3d.js","https://code.highcharts.com/modules/data.js","https://code.highcharts.com/modules/exporting.js","https://code.highcharts.com/modules/funnel.js","https://code.highcharts.com/modules/annotations.js","https://code.highcharts.com/modules/solid-gauge.js"],loaded = 0; if (typeof window["HighchartsEditor"] === "undefined") {window.HighchartsEditor = {ondone: [cl],hasWrapped: false,hasLoaded: false};include(files[0]);} else {if (window.HighchartsEditor.hasLoaded) {cl();} else {window.HighchartsEditor.ondone.push(cl);}}function isScriptAlreadyIncluded(src){var scripts = document.getElementsByTagName("script");for (var i = 0; i < scripts.length; i++) {if (scripts[i].hasAttribute("src")) {if ((scripts[i].getAttribute("src") || "").indexOf(src) >= 0 || (scripts[i].getAttribute("src") === "http://code.highcharts.com/highcharts.js" && src === "https://code.highcharts.com/stock/highstock.js")) {return true;}}}return false;}function check() {if (loaded === files.length) {for (var i = 0; i < window.HighchartsEditor.ondone.length; i++) {try {window.HighchartsEditor.ondone[i]();} catch(e) {console.error(e);}}window.HighchartsEditor.hasLoaded = true;}}function include(script) {function next() {++loaded;if (loaded < files.length) {include(files[loaded]);}check();}if (isScriptAlreadyIncluded(script)) {return next();}var sc=document.createElement("script");sc.src = script;sc.type="text/javascript";sc.onload=function() { next(); };document.head.appendChild(sc);}function each(a, fn){if (typeof a.forEach !== "undefined"){a.forEach(fn);}else{for (var i = 0; i < a.length; i++){if (fn) {fn(a[i]);}}}}var inc = {},incl=[]; each(document.querySelectorAll("script"), function(t) {inc[t.src.substr(0, t.src.indexOf("?"))] = 1; }); function cl() {if(typeof window["Highcharts"] !== "undefined"){var options={"chart":{"type":"pie","polar":false},"plotOptions":{"pie":{"allowPointSelect":true,"cursor":true,"showInLegend":true,"dataLabels":{"enabled":false}},"series":{"animation":false,"dataLabels":{"style":{"color":"contrast","fontSize":"6px","fontWeight":"bold","textOutline":"1px 1px contrast"},"enabled":false}}},"title":{"text":"First Choice Jobs"},"subtitle":{"text":"Percentage of students who picked each job as their first choice on their job application"},"exporting":{},"series":[{"name":"percentage","turboThreshold":0,"_symbolIndex":0}],"data":{"csv":"\"first choice job choices\";\" percentage\"\n\"Biologist\";5\n\"Captain\";5\n\"Security Guard\";7\n\"Navigator\";2\n\"Communications\";5\n\"First Officer\";5\n\"Pilot\";5\n\"Hacker\";9\n\"Engineer\";16\n\"Physicist\";1\n\"Deck Chief\";1\n\"Tactical (formerly Gunner)\";9\n\"Data Collections Officer\";1\n\"Videoographer\";3\n\"Second Officer\";5\n\"Security Chief\";3\n\"Doctor\";20","googleSpreadsheetKey":false,"googleSpreadsheetWorksheet":false},"legend":{"enabled":true,"floating":false,"align":"right","x":0,"verticalAlign":"middle","layout":"vertical","itemHiddenStyle":{"fontFamily":"\"Lucida Grande\", \"Lucida Sans Unicode\", Verdana, Arial, Helvetica, sans-serif","color":"#cccccc","fontSize":"14px","fontWeight":"normal","fontStyle":"normal"},"itemStyle":{"fontFamily":"\"Lucida Grande\", \"Lucida Sans Unicode\", Verdana, Arial, Helvetica, sans-serif","color":"#333333","fontSize":"8px","fontWeight":"bold","fontStyle":"normal","cursor":"pointer"}},"yAxis":[{"title":{}}]};/*
+// Sample of extending options:
+Highcharts.merge(true, options, {
+    chart: {
+        backgroundColor: "#bada55"
+    },
+    plotOptions: {
+        series: {
+            cursor: "pointer",
+            events: {
+                click: function(event) {
+                    alert(this.name + " clicked\n" +
+                          "Alt: " + event.altKey + "\n" +
+                          "Control: " + event.ctrlKey + "\n" +
+                          "Shift: " + event.shiftKey + "\n");
+                }
+            }
+        }
+    }
+});
+*/new Highcharts.Chart("highcharts-361f7803-7f51-4347-9c9d-5f795a6162ef", options);}}})();
+</script>

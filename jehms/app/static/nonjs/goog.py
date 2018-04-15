@@ -2,6 +2,8 @@
 from __future__ import print_function
 import httplib2
 import os
+import copy
+import re
 
 from apiclient import discovery
 from oauth2client import client
@@ -49,13 +51,40 @@ def get_credentials():
         print('Storing credentials to ' + credential_path)
     return credentials
 
-def main():
-    """Shows basic usage of the Sheets API.
 
-    Creates a Sheets API service object and prints the names and majors of
-    students in a sample spreadsheet:
-    https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-    """
+
+def preParse(raw):
+    fieldHeads = raw[0]
+    new = []
+    for row in raw[1:]:
+        newRow = []
+        newRow.append(row[0].replace("/", "-")) # postgres readable date
+
+        cleanID = re.sub('[^0-9]', '', row[1])
+        if cleanID != '':
+            newRow.append(int(re.sub('[^0-9]', '', row[1]))) # remove non-digits
+        else:
+            newRow.append(0) # no digits in id...
+
+        newRow.append(int(row[2][0])) # remove 'th'
+        newRow.append(row[3]) # mission title
+        newRow.append(int(row[4])) # r/o 5
+
+        for const in range(5, 10): # short answer, no parsing necessary
+            newRow.append(row[const])
+
+        if (row[10].lower() == "yes"):
+            newRow.append(True)
+        else:
+            newRow.append(False)
+
+        new.append(newRow)
+    return new
+
+def postParse(raw):
+    pass
+
+def main():
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     discoveryUrl = ('https://sheets.googleapis.com/$discovery/rest?'
@@ -63,19 +92,22 @@ def main():
     service = discovery.build('sheets', 'v4', http=http,
                               discoveryServiceUrl=discoveryUrl)
 
-    spreadsheetId = '1eLyS9W-NRlRZ_2CPcJKcZjdaS4LVi8a-R0x-UW_8ewg'
-    rangeName = 'Sheet1!A:E'
-    result = service.spreadsheets().values().get(
-        spreadsheetId=spreadsheetId, range=rangeName).execute()
-    values = result.get('values', [])
+    preSpreadsheetId = '1eLyS9W-NRlRZ_2CPcJKcZjdaS4LVi8a-R0x-UW_8ewg'
+    preRange = 'Sheet1!A:K'
+    preResult = service.spreadsheets().values().get(
+        spreadsheetId=preSpreadsheetId, range=preRange).execute()
+    preValues = preResult.get('values', [])
 
-    if not values:
+    # postSpreadsheetId = ''
+    # postRange = 'Sheet1!'
+    # postResult = service.spreadsheets().values().get(
+    #     spreadsheetId=postSpreadsheetId, range=postRange).execute()
+    # postValues = postResult.get('values', [])
+    if not preValues:
         print('No data found.')
     else:
-        # print('Name, Major:')
-        for row in values:
-            # Print columns A and E, which correspond to indices 0 and 4.
-            print('%s, %s' % (row[0], row[4]))
+        clean = preParse(copy.deepcopy(preValues))
+
 
 
 if __name__ == '__main__':

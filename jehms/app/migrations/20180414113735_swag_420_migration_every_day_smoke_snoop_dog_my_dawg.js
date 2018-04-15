@@ -5,8 +5,8 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('pre_responses', function(table) {
       // identification columns
       table.increments('id').notNullable().primary();
-      table.integer   ('student_id').notNullable();
       table.dateTime  ('time' ).notNullable();
+      table.integer   ('student_id').notNullable();
       table.integer   ('grade_level').notNullable();
       table.string    ('mission').notNullable();
       table.integer   ('pre_mission_score').notNullable();

@@ -36,7 +36,7 @@ router.get('/get_all_post', function(req, res, next) {
   });
 });
 
-// Generate the word cloud, which will be wordcloud/cloud.png
+// Generate the word cloud, which will be static/nonjs/wordcloud/cloud.png
 router.get('/word_cloud', function(req, res, next) {
 	exec('sh ./static/nonjs/script.sh', function(err, stdout, stderr) {
 		console.log('stdout: ' + stdout);

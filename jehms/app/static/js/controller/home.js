@@ -8,5 +8,5 @@ var home_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootScope, $h
 			Materialize.toast('Error getting word cloud', 5000);
 		});
 	}
-	$scope.get_all_responses();
+	// $scope.get_all_responses();
 }];

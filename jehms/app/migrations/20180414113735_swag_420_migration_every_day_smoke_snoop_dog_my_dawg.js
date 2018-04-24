@@ -23,22 +23,22 @@ exports.up = function(knex, Promise) {
       table.increments('id').notNullable().primary();
       table.integer   ('student_id').notNullable();
       table.dateTime  ('time' ).notNullable();
-      table.integer   ('grade_level').notNullable();
-      table.string    ('mission').notNullable();
-      table.string    ('mission_favorite').notNullable();
-      table.string    ('easiest').notNullable();
-      table.string    ('most_difficult').notNullable();
-      table.string    ('improve_suggestion').notNullable();
-      table.integer   ('communicate_score').notNullable();
-      table.integer   ('communicate_score_others').notNullable();
-      table.integer   ('trust_others').notNullable();
-      table.string    ('trust_examples').notNullable();
-      table.string    ('problem_solve_skills').notNullable();
-      table.string    ('create_solution').notNullable();
-      table.string    ('personality_traits').notNullable();
-      table.integer   ('teamwork_comp_rate').notNullable();
-      table.string    ('job_first_choice').notNullable();
-      table.boolean   ('job_first_choice_get').notNullable();
+      table.integer   ('grade_level');
+      table.string    ('mission');
+      table.string    ('mission_favorite');
+      table.string    ('easiest');
+      table.string    ('most_difficult');
+      table.string    ('improve_suggestion');
+      table.integer   ('communicate_score');
+      table.integer   ('communicate_score_others');
+      table.integer   ('trust_others');
+      table.string    ('trust_examples');
+      table.string    ('problem_solve_skills');
+      table.string    ('create_solution');
+      table.string    ('personality_traits');
+      table.integer   ('teamwork_comp_rate');
+      table.string    ('job_first_choice');
+      table.boolean   ('job_first_choice_get');
 
       // Either
       table.boolean   ('job_first_choice_learn');

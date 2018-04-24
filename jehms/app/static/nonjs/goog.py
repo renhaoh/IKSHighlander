@@ -4,6 +4,7 @@ import httplib2
 import os
 import copy
 import re
+import csv
 
 from apiclient import discovery
 from oauth2client import client
@@ -51,6 +52,9 @@ def get_credentials():
         print('Storing credentials to ' + credential_path)
     return credentials
 
+# def fixEncode(row):
+#     res = []
+#     for s in row:
 
 
 def preParse(raw):
@@ -68,7 +72,7 @@ def preParse(raw):
 
         newRow.append(int(row[2][0])) # remove 'th'
         newRow.append(row[3]) # mission title
-        newRow.append(int(row[4])) # r/o 5
+        newRow.append(int(row[4])) # rate out of 5
 
         for const in range(5, 10): # short answer, no parsing necessary
             newRow.append(row[const])
@@ -78,11 +82,16 @@ def preParse(raw):
         else:
             newRow.append(False)
 
+        # newRow = fixEncode(newRow)
         new.append(newRow)
     return new
 
 def postParse(raw):
-    pass
+    # fieldHeads = raw[0]
+    # new = []
+    # for row in raw[1:]:
+    return []
+        
 
 def main():
     credentials = get_credentials()
@@ -98,16 +107,24 @@ def main():
         spreadsheetId=preSpreadsheetId, range=preRange).execute()
     preValues = preResult.get('values', [])
 
-    # postSpreadsheetId = ''
-    # postRange = 'Sheet1!'
-    # postResult = service.spreadsheets().values().get(
-    #     spreadsheetId=postSpreadsheetId, range=postRange).execute()
-    # postValues = postResult.get('values', [])
+    postSpreadsheetId = '1BOV0NO9JQqJqo5XhFkHY30b5qaeNbX_xI47ukHWN-IU'
+    postRange = 'Sheet1'
+    postResult = service.spreadsheets().values().get(
+        spreadsheetId=postSpreadsheetId, range=postRange).execute()
+    postValues = postResult.get('values', [])
     if not preValues:
         print('No data found.')
     else:
-        clean = preParse(copy.deepcopy(preValues))
+        cleanPre = preParse(copy.deepcopy(preValues))
+        cleanPost = postParse(copy.deepcopy(postValues))
 
+        with open("./pre_surveys/pre.csv", "w", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerows(cleanPre)
+
+        with open("./post_surveys/post.csv", "w", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerows(cleanPost)
 
 
 if __name__ == '__main__':

@@ -13,7 +13,8 @@ app.factory("$globs", globs);
 app.controller("login_ctl", login_ctl);
 app.controller("home_ctl", home_ctl);
 app.controller("charts_ctl", charts_ctl);
-app.controller("general_data_ctl", general_data_ctl);
+app.controller("pre_survey_ctl", pre_survey_ctl);
+app.controller("post_survey_ctl", post_survey_ctl);
 
 // Register routes with respective templates and controllers
 app.config(function($routeProvider) {
@@ -29,8 +30,12 @@ app.config(function($routeProvider) {
       templateUrl: "html/charts.html",
       controller: "charts_ctl"
   });
-  $routeProvider.when("/general_data", {
-      templateUrl: "html/general_data.html",
-      controller: "general_data_ctl"
+  $routeProvider.when("/post_survey", {
+      templateUrl: "html/post_survey.html",
+      controller: "post_survey_ctl"
+  });
+  $routeProvider.when("/pre_survey", {
+      templateUrl: "html/pre_survey.html",
+      controller: "pre_survey_ctl"
   }).otherwise({ redirectTo: '/'});
 });

@@ -118,11 +118,11 @@ def main():
         cleanPre = preParse(copy.deepcopy(preValues))
         cleanPost = postParse(copy.deepcopy(postValues))
 
-        with open("./pre_surveys/pre.csv", "w", encoding="utf-8") as f:
+        with open("pre.csv", "w", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerows(cleanPre)
 
-        with open("./post_surveys/post.csv", "w", encoding="utf-8") as f:
+        with open("post.csv", "w", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerows(cleanPost)
 

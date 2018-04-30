@@ -9,6 +9,12 @@
 		          <i class="material-icons">close</i>
 		        </div>
 		      </form>
+		      <div class="fixed-action-btn">
+		      <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">cloud_download</i></a>
+		      </div>
+		      <div class="fixed-action-btn" style="margin-right: 75px;">
+		      <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modalupload" modal><i class="material-icons">cloud_upload</i></a>
+		      </div>
 			<table class="striped" style="width: 100%; font-size: 12px;">
 <tbody style="display: block; height: 600px; overflow: auto;">
 <tr>
@@ -4538,6 +4544,24 @@
 <td>False</td>
 </tr>
 </tbody></table>
+		<div id="modalupload" class="modal">
+		    <div class="modal-content">
+		      <h4>Upload Student Data</h4>
+		      <p>From the Google Sheets spreadsheet, navigate to 'Download As' and select Comma-separated values ('.csv'). Upload that file here!</p>
+		    </div>
+			<div class="file-field input-field" style="padding-left: 29px; padding-right: 29px">
+	          <div class="btn blue">
+	            <span>Browse</span>
+	            <input id="csv_input" type="file" accept=".txt">
+	          </div>
+	          <div class="file-path-wrapper">
+	            <input class="file-path validate" type="text">
+	          </div>
+	        </div>
+		    <div class="modal-footer">
+		      <a class="modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+		    </div>
+		  </div>
 		</div>
 	</div>
 </div>

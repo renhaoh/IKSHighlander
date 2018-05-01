@@ -37,5 +37,5 @@ app.config(function($routeProvider) {
   $routeProvider.when("/pre_survey", {
       templateUrl: "html/pre_survey.html",
       controller: "pre_survey_ctl"
-  });//.otherwise({ redirectTo: '/'});
+  }).otherwise({ redirectTo: '/'});
 });

@@ -5,6 +5,7 @@ var db = require('./db');
 var app = express();
 var session = require('express-session');
 var server = http.Server(app);
+var bodyParser = require('body-parser');
 var dbSessionStore = require('connect-session-knex')(session);
 
 if (process.env.NODE_ENV === 'development') {
@@ -24,8 +25,11 @@ var sessionMiddleware = session({
     tablename: 'sessions'
   })
 });
-app.use(sessionMiddleware);
 
+app.use(sessionMiddleware);
+app.use(bodyParser.json());
 app.use('/', express.static('./static'));
 app.use('/api/home', require('./components/home').routes);
+app.use('/api/pre', require('./components/pre').routes);
+app.use('/api/post', require('./components/post').routes);
 module.exports = { app: app, server: server };

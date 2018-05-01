@@ -87,10 +87,38 @@ def preParse(raw):
     return new
 
 def postParse(raw):
-    # fieldHeads = raw[0]
-    # new = []
-    # for row in raw[1:]:
-    return []
+    fieldHeads = raw[0]
+    new = []
+    for row in raw[1:]:
+        newRow = []
+        newRow.append(row[0].replace("/", "-")) # postgres readable date
+        cleanID = re.sub('[^0-9]', '', row[1])
+        if cleanID != '':
+            newRow.append(int(re.sub('[^0-9]', '', row[1]))) # remove non-digits
+        else:
+            newRow.append(0) # no digits in id...
+
+        newRow.append(int(row[2][0])) # remove 'th'
+
+        newRow.append(row[3]) # mission title
+        newRow.append(int(row[4])) # rate out of 5
+
+        for const in range(4, 8): # short answer, no parsing necessary
+            newRow.append(row[const])
+
+        newRow.append(int(row[8])) # rate out of 10
+        newRow.append(int(row[9])) # rate out of 10
+        newRow.append(int(row[10])) # rate out of 10
+
+        for const in range(11, 33): # short answer, no parsing necessary
+            newRow.append(row[const])
+
+        newRow.append(int(row[33])) # rate out of 5
+
+        newRow.append(row[34]) # short answer, no parsing necessary
+        newRow.append(row[35]) # short answer, no parsing necessary
+
+    return new
         
 
 def main():

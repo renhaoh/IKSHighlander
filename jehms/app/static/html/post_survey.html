@@ -1,4 +1,8 @@
-
+<style>
+td,th{border-bottom: 1px solid #f8f2ff; border-left: 1px solid #f8f2ff;}
+tr:nth-child(odd) {background-color: #f2e2ff;}
+tr:hover {background-color: #fffcef}
+</style>
 <div data-extend-template="/html/base.html">
 	<div data-block-append="content">
 		<div class="container">
@@ -16,9 +20,9 @@
 		      <div class="fixed-action-btn" style="margin-right: 75px;">
 		      <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modalupload" modal><i class="material-icons">cloud_upload</i></a>
 		      </div>
-			<table class="striped" style="width: 100%; font-size: 12px;">
+			<table style="width: 100%; font-size: 12px; border: 5px black;">
 		<tbody style="display: block; height: 600px; overflow: auto;">
-			<tr>
+			<tr style="background-color: #6200b2; color:white; font-size: 15px">
 				<th>Time</th>
 				<th>Student ID</th>
 				<th>Grade</th>

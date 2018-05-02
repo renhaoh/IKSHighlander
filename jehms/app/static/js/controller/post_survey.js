@@ -46,6 +46,11 @@ var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSc
 		});
 	}
 
+	$scope.strToBool = function (s) {
+		if(s.toLowerCase() === "yes") return true;
+		else return false;
+	}
+
 	$scope.parse_pop = function (raw) {
 		var res = [];
 		for(var i=1; i<raw.length; i++) {
@@ -59,22 +64,48 @@ var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSc
 
 			var cleanID = row[1].replace(/[^0-9\.]+/g, "");
 			if(cleanID != "") {
-				newRow.push(cleanID);
+				newRow.push(parseInt(cleanID));
 			} else {
 				newRow.push(0);
 			}
 
 			newRow.push(parseInt(row[2][0]));
 			newRow.push(row[3]);
-			newRow.push(parseInt(row[4]));
+			newRow.push(row[4]);
 
-			for(var c=5; c<10; c++) {
+			for(var c=5; c<8; c++) {
 				newRow.push(row[c]);
 			}
 
-			if (row[10].toLowerCase() == "yes") newRow.push(true); 
-			else newRow.push(false);
+			newRow.push(parseInt(row[8]));
+			newRow.push(parseInt(row[9]));
+			newRow.push(parseInt(row[10]));
 
+			for(var c=11; c<16; c++) {
+				newRow.push(row[c]);
+			}
+			newRow.push($scope.strToBool(row[16]));
+			newRow.push($scope.strToBool(row[17]));
+			for(var c=18; c<21; c++) {
+				newRow.push(row[c]);
+			}
+			newRow.push($scope.strToBool(row[21]));
+			newRow.push($scope.strToBool(row[22]));
+			for(var c=23; c<26; c++) {
+				newRow.push(row[c]);
+			}
+			newRow.push($scope.strToBool(row[26]));
+			for(var c=27; c<29; c++) {
+				newRow.push(row[c]);
+			}
+			newRow.push($scope.strToBool(row[29]));
+			newRow.push(row[30]);
+			newRow.push($scope.strToBool(row[31]));
+			newRow.push(row[32]);
+			newRow.push(parseInt(row[33]));
+			newRow.push(row[34]);
+			newRow.push(row[35]);
+			console.log(newRow);
 			res.push(newRow);
 			$scope.populate(newRow);
 		}
@@ -102,7 +133,7 @@ var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSc
 
 	$scope.responses_to_tsv = function () {
 		var rs = $scope.responses;
-		var tsv = "time\tstudent_id\tgrade_level\tmission\tpre_mission_score\tpre_job_role\tpre_job_why\tpre_job_skills\tpre_personality\tpre_excited\tpre_mission_jitters\n";
+		var tsv = "time\tstudent_id\tgrade_level\tmission\tmission_favorite\teasiest\tmost_difficult\timprove_suggestion\tcommunicate_score\tcommunicate_score_others\ttrust_others\ttrust_examples\tproblem_solve_skills\tcreate_solution\tpersonality_traits\tteamwork_comp_rate\tjob_first_choice\tjob_first_choice_get\tjob_first_choice_learn\tjob_first_choice_learn_why\tjob_first_choice_other_roles\tjob_first_choice_skills\tjob_first_choice_pressure\tjob_first_choice_pressure_why\tjob_first_choice_critical\tjob_first_choice_critical_why\tjob_second_choice_affect\tjob_second_choice_affect_why\tjob_second_choice_other_roles\tjob_second_choice_skills\tjob_second_choice_pressure\tjob_second_choice_pressure_why\tjob_second_choice_critical\tjob_second_choice_critical_why\texamples_tie_class\tsomething_new\n";
 
 		for(var row=0; row<rs.length; row++) {
 			var keys = Object.keys(rs[row]);

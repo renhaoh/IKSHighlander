@@ -59,7 +59,7 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 
 			var cleanID = row[1].replace(/[^0-9\.]+/g, "");
 			if(cleanID != "") {
-				newRow.push(cleanID);
+				newRow.push(parseInt(cleanID));
 			} else {
 				newRow.push(0);
 			}

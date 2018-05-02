@@ -21,8 +21,8 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('post_responses', function(table) {
     	// identification columns
       table.increments('id').notNullable().primary();
-      table.integer   ('student_id').notNullable().unique();
-      table.dateTime  ('time' ).notNullable().unique();
+      table.dateTime  ('time' ).notNullable();
+      table.integer   ('student_id').notNullable();
       table.integer   ('grade_level');
       table.string    ('mission');
       table.string    ('mission_favorite', 1000);
@@ -36,9 +36,11 @@ exports.up = function(knex, Promise) {
       table.string    ('problem_solve_skills', 1000);
       table.string    ('create_solution', 1000);
       table.string    ('personality_traits', 1000);
-      table.integer   ('teamwork_comp_rate');
+      table.integer   ('teamwork_comp_rate'); //???
       table.string    ('job_first_choice', 1000);
       table.boolean   ('job_first_choice_get');
+      
+      
 
       // Either
       table.boolean   ('job_first_choice_learn');

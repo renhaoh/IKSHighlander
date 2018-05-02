@@ -37,23 +37,25 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 
 	$scope.populate = function (r) {
 		var payload = {
-			thiscantbeanythingbutmepls: r
+			row: r
 		}
-		console.log(payload);
 		$http.post("/api/pre/populate", payload).then(function(success) {
-			Materialize.toast('New data added!', 3000);
+			$scope.responses.push(success.data[0])
 		}, function(fail) {
 			Materialize.toast('Failed inserting data', 5000);
 		});
 	}
 
-	$scope.parse = function (raw) {
+	$scope.parse_pop = function (raw) {
 		var res = [];
 		for(var i=1; i<raw.length; i++) {
+			if(raw[i].length < 5) continue;
+
 			var row = raw[i].split("\t");
 			var newRow = [];
 
-			newRow.push(row[0].replace("/", "-"));
+			// newRow.push(row[0].replace("/\//", "-"));
+			newRow.push(row[0]);
 
 			var cleanID = row[1].replace(/[^0-9\.]+/g, "");
 			if(cleanID != "") {
@@ -74,14 +76,17 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 			else newRow.push(false);
 
 			res.push(newRow);
+			$scope.populate(newRow);
 		}
-		$scope.populate(res);
+		
 		return res;
 	}
 
 	$scope.submit_res = function (responses) {
 		$http.delete("/api/pre/clear");
-		$scope.clean = $scope.parse(responses);
+		$scope.responses = [];
+		$scope.clean = $scope.parse_pop(responses);
+		$scope.get_all();
 	}
 
 	$scope.reload_responses = function () {
@@ -93,5 +98,28 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 			$scope.submit_res(e.target.result.split("\n"));
 		}
 		fr.readAsText(file);
+	}
+
+	$scope.responses_to_tsv = function () {
+		var rs = $scope.responses;
+		console.log(rs);
+		var tsv = "time\tstudent_id\tgrade_level\tmission\tpre_mission_score\tpre_job_role\tpre_job_why\tpre_job_skills\tpre_personality\tpre_excited\tpre_mission_jitters\n";
+
+		for(var row=0; row<rs.length; row++) {
+			var keys = Object.keys(rs[row]);
+			for(var i=0; i<(keys.length-1); i++) {
+				var key = keys[i];
+				if(typeof rs[row][key] !== "string") {
+					tsv += rs[row][key].toString() + "\t";
+				} else {
+					tsv += rs[row][key] + "\t";
+				}
+				
+			}
+			tsv += "\n";
+		}
+		var encodedUri = encodeURIComponent(tsv);
+		window.location.href = "data:text/tab-separated-values," + encodedUri;
+		console.log(tsv);
 	}
 }];

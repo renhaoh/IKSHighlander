@@ -36,8 +36,22 @@ var preSchema = {
 }
 
 router.post('/populate', function(req, res, next) {
-	console.log("from populate", req.body);	
-	return db.insert(req.body)
+	console.log("from populate", req.body);
+	var row = req.body.row;
+	var payload = {
+		time: row[0],
+		student_id: row[1],
+		grade_level: row[2],
+		mission: row[3],
+		pre_mission_score: row[4],
+		pre_job_role: row[5],
+		pre_job_why: row[6],
+		pre_job_skills: row[7],
+		pre_personality: row[8],
+		pre_excited: row[9],
+		pre_mission_jitters: row[10]
+	}	
+	return db.insert(payload)
 			 .into(pre)
 			 .returning('*')
 			 .then(function (success) {

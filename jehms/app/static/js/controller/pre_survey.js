@@ -102,7 +102,6 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 
 	$scope.responses_to_tsv = function () {
 		var rs = $scope.responses;
-		console.log(rs);
 		var tsv = "time\tstudent_id\tgrade_level\tmission\tpre_mission_score\tpre_job_role\tpre_job_why\tpre_job_skills\tpre_personality\tpre_excited\tpre_mission_jitters\n";
 
 		for(var row=0; row<rs.length; row++) {
@@ -120,6 +119,5 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 		}
 		var encodedUri = encodeURIComponent(tsv);
 		window.location.href = "data:text/tab-separated-values," + encodedUri;
-		console.log(tsv);
 	}
 }];

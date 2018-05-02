@@ -18,8 +18,7 @@ router.get('/get_all', function(req, res, next) {
 });
 
 router.delete('/clear', function(req, res, next) {
-	return db.del().from('pre_responses').then(function (count) {
-		console.log("from delete", count);
+	return db.del().from(pre).then(function (count) {
 		return res.sendStatus(200);
 	});
 });
@@ -36,7 +35,6 @@ var preSchema = {
 }
 
 router.post('/populate', function(req, res, next) {
-	console.log("from populate", req.body);
 	var row = req.body.row;
 	var payload = {
 		time: row[0],

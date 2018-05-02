@@ -31,6 +31,18 @@ Navigate to the /app directory before moving on to the next steps.
 npm install
 ```
 
+### Install knex global cli
+```
+npm install knex --save
+```
+
+### Run Migrations
+```
+knex migrate:latest
+```
+
+Note: if migrations ever don't work, drop all tables in the iks database and rerun the migrations.
+
 ### Start application:
 ```
 npm start

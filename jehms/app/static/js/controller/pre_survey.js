@@ -25,10 +25,13 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 			var keys = Object.keys(response);
 			for(var i=0; i<(keys.length-1); i++) {
 				var key = keys[i];
+				var search_lower = $scope.search.toLowerCase();
 				if(typeof response[key] !== "string") {
-					if(response[key].toString().includes($scope.search)) return true;
+					var res_lower = response[key].toString().toLowerCase();
+					if(res_lower.includes(search_lower)) return true;
 				} else {
-					if(response[key].includes($scope.search)) return true;
+					var res_lower = response[key].toLowerCase();
+					if(res_lower.includes(search_lower)) return true;
 				}
 			}
 			return false;

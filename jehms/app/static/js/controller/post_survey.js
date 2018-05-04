@@ -105,7 +105,6 @@ var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSc
 			newRow.push(parseInt(row[33]));
 			newRow.push(row[34]);
 			newRow.push(row[35]);
-			console.log(newRow);
 			res.push(newRow);
 			$scope.populate(newRow);
 		}
@@ -137,6 +136,7 @@ var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSc
 
 		for(var row=0; row<rs.length; row++) {
 			var keys = Object.keys(rs[row]);
+			console.log(keys);
 			for(var i=0; i<(keys.length-1); i++) {
 				var key = keys[i];
 				if(typeof rs[row][key] !== "string") {

@@ -72,6 +72,17 @@ router.post('/populate', function(req, res, next) {
 			 .then(function (success) {
 			 	return res.send(success);
 			 });
-})
+});
+
+router.get('/count', function(req, res, next) {
+  return db.count('id')
+  .from(post)
+  .then(function(responses) {
+    return res.send(responses);
+  })
+  .catch(function(err) {
+      return res.status(400).send(err);
+  });
+});
 
 module.exports = router;

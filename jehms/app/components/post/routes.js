@@ -30,16 +30,44 @@ router.post('/populate', function(req, res, next) {
 		student_id: row[1],
 		grade_level: row[2],
 		mission: row[3],
-		pre_mission_score: row[4],
-		pre_job_role: row[5],
-		pre_job_why: row[6],
-		pre_job_skills: row[7],
-		pre_personality: row[8],
-		pre_excited: row[9],
-		pre_mission_jitters: row[10]
+		mission_favorite: row[4],
+		easiest: row[5],
+		most_difficult: row[6],
+		improve_suggestion: row[7],
+		communicate_score: row[8],
+		communicate_score_others: row[9],
+		trust_others: row[10],
+		trust_examples: row[11],
+		problem_solve_skills: row[12],
+		create_solution: row[13],
+		personality_traits: row[14],
+		teamwork_comp_rate: row[33],
+		job_first_choice: row[15],
+		job_first_choice_get: row[16],
+
+		job_first_choice_learn: row[17],
+		job_first_choice_learn_why: row[18],
+		job_first_choice_other_roles: row[19],
+		job_first_choice_skills: row[20],
+		job_first_choice_pressure: row[21],
+		job_first_choice_pressure_why: row[34],
+		job_first_choice_critical: row[29],
+		job_first_choice_critical_why: row[30],
+
+		job_second_choice_affect: row[22],
+		job_second_choice_affect_why: row[23],
+		job_second_choice_other_roles: row[24],
+		job_second_choice_skills: row[25],
+		job_second_choice_pressure: row[26],
+		job_second_choice_pressure_why: row[35],
+		job_second_choice_critical: row[31],
+		job_second_choice_critical_why: row[32],
+
+		examples_tie_class: row[27],
+		something_new: row[28]
 	}	
 	return db.insert(payload)
-			 .into(pre)
+			 .into(post)
 			 .returning('*')
 			 .then(function (success) {
 			 	return res.send(success);

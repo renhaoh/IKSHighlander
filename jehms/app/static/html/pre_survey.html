@@ -36,7 +36,6 @@ tr:hover {background-color: #fffcef}
 <th>Jitters</th>
 </tr>
 
-
 <tr>
 <td>3-6-2018 8:57:49</td>
 <td align="right">421422</td>
@@ -4549,6 +4548,40 @@ tr:hover {background-color: #fffcef}
 <td>False</td>
 </tr>
 </tbody></table>
+
+			<tr ng-repeat="res in responses" ng-if="in_search(res);">
+				<td>{{res.time}}</td>
+				<td>{{res.student_id}}</td>
+				<td>{{res.grade_level}}</td>
+				<td>{{res.mission}}</td>
+				<td>{{res.pre_excited}}</td>
+				<td>{{res.pre_job_role}}</td>
+				<td>{{res.pre_job_skills}}</td>
+				<td>{{res.pre_job_why}}</td>
+				<td>{{res.pre_mission_jitters}}</td>
+				<td>{{res.pre_mission_score}}</td>
+				<td>{{res.pre_personality}}</td>
+			</tr>
+		</tbody>
+		</table>
+		<div id="modalupload" class="modal">
+		    <div class="modal-content">
+		      <h4>Upload Student Data</h4>
+		      <p>From the Google Sheets spreadsheet for pre-student responses, navigate to 'Download As' and select Tab-separated values ('.tsv'). Upload that file here!</p>
+		    </div>
+			<div class="file-field input-field" style="padding-left: 29px; padding-right: 29px">
+	          <div class="btn blue">
+	            <span>Browse</span>
+	            <input id="csv_input" type="file" accept=".tsv">
+	          </div>
+	          <div class="file-path-wrapper">
+	            <input class="file-path validate" type="text">
+	          </div>
+	        </div>
+		    <div class="modal-footer">
+		      <a class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="reload_responses()">Submit</a>
+		    </div>
+		  </div>
 		</div>
 	</div>
 </div>

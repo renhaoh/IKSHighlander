@@ -5,7 +5,7 @@ tr:hover {background-color: #fffcef}
 </style>
 <div data-extend-template="/html/base.html">
 	<div data-block-append="content">
-		<div class="container">
+		<div class="container" style="overflow: auto;">
 			<br/>
 			<form>
 		        <div class="input-field">
@@ -27,13 +27,38 @@ tr:hover {background-color: #fffcef}
 				<th>Student ID</th>
 				<th>Grade</th>
 				<th>Mission</th>
-				<th>Pre Learning Score</th>
-				<th>First Choice Job</th>
-				<th>First Choice Reason</th>
-				<th>Skills</th>
-				<th>Personalities</th>
-				<th>Excited</th>
-				<th>Jitters</th>
+				<th>mission_favorite</th>
+				<th>easiest</th>
+				<th>most_difficult</th>
+				<th>improve_suggestion</th>
+				<th>communicate_score</th>
+				<th>communicate_score_others</th>
+				<th>trust_others</th>
+				<th>trust_examples</th>
+				<th>problem_solve_skills</th>
+				<th>create_solution</th>
+				<th>personality_traits</th>
+				<th>teamwork_comp_rate</th>
+				<th>job_first_choice</th>
+				<th>job_first_choice_get</th>
+				<th>job_first_choice_learn</th>
+				<th>job_first_choice_learn_why</th>
+				<th>job_first_choice_other_roles</th>
+				<th>job_first_choice_skills</th>
+				<th>job_first_choice_pressure</th>
+				<th>job_first_choice_pressure_why</th>
+				<th>job_first_choice_critical</th>
+				<th>job_first_choice_critical_why</th>
+				<th>job_second_choice_affect</th>
+				<th>job_second_choice_affect_why</th>
+				<th>job_second_choice_other_roles</th>
+				<th>job_second_choice_skills</th>
+				<th>job_second_choice_pressure</th>
+				<th>job_second_choice_pressure_why</th>
+				<th>job_second_choice_critical</th>
+				<th>job_second_choice_critical_why</th>
+				<th>examples_tie_class</th>
+				<th>something_new</th>
 			</tr>
 
 			<tr ng-repeat="res in responses" ng-if="in_search(res);">
@@ -41,20 +66,45 @@ tr:hover {background-color: #fffcef}
 				<td>{{res.student_id}}</td>
 				<td>{{res.grade_level}}</td>
 				<td>{{res.mission}}</td>
-				<td>{{res.pre_excited}}</td>
-				<td>{{res.pre_job_role}}</td>
-				<td>{{res.pre_job_skills}}</td>
-				<td>{{res.pre_job_why}}</td>
-				<td>{{res.pre_mission_jitters}}</td>
-				<td>{{res.pre_mission_score}}</td>
-				<td>{{res.pre_personality}}</td>
+				<td>{{res.mission_favorite}}</td>
+				<td>{{res.easiest}}</td>
+				<td>{{res.most_difficult}}</td>
+				<td>{{res.improve_suggestion}}</td>
+				<td>{{res.communicate_score}}</td>
+				<td>{{res.communicate_score_others}}</td>
+				<td>{{res.trust_others}}</td>
+				<td>{{res.trust_examples}}</td>
+				<td>{{res.problem_solve_skills}}</td>
+				<td>{{res.create_solution}}</td>
+				<td>{{res.personality_traits}}</td>
+				<td>{{res.teamwork_comp_rate}}</td>
+				<td>{{res.job_first_choice}}</td>
+				<td>{{res.job_first_choice_get}}</td>
+				<td>{{res.job_first_choice_learn}}</td>
+				<td>{{res.job_first_choice_learn_why}}</td>
+				<td>{{res.job_first_choice_other_roles}}</td>
+				<td>{{res.job_first_choice_skills}}</td>
+				<td>{{res.job_first_choice_pressure}}</td>
+				<td>{{res.job_first_choice_pressure_why}}</td>
+				<td>{{res.job_first_choice_critical}}</td>
+				<td>{{res.job_first_choice_critical_why}}</td>
+				<td>{{res.job_second_choice_affect}}</td>
+				<td>{{res.job_second_choice_affect_why}}</td>
+				<td>{{res.job_second_choice_other_roles}}</td>
+				<td>{{res.job_second_choice_skills}}</td>
+				<td>{{res.job_second_choice_pressure}}</td>
+				<td>{{res.job_second_choice_pressure_why}}</td>
+				<td>{{res.job_second_choice_critical}}</td>
+				<td>{{res.job_second_choice_critical_why}}</td>
+				<td>{{res.examples_tie_class}}</td>
+				<td>{{res.something_new}}</td>
 			</tr>
 		</tbody>
 		</table>
 		<div id="modalupload" class="modal">
 		    <div class="modal-content">
 		      <h4>Upload Student Data</h4>
-		      <p>From the Google Sheets spreadsheet, navigate to 'Download As' and select Tab-separated values ('.tsv'). Upload that file here!</p>
+		      <p>From the Google Sheets spreadsheet for post-student responses, navigate to 'Download As' and select Tab-separated values ('.tsv'). Upload that file here!</p>
 		    </div>
 			<div class="file-field input-field" style="padding-left: 29px; padding-right: 29px">
 	          <div class="btn blue">

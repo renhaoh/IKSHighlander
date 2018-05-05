@@ -8,113 +8,113 @@ tr:hover {background-color: #fffcef}
 		<div class="container" style="overflow: auto;">
 			<br/>
 			<form>
-		        <div class="input-field">
-		          <input id="search" type="search" placeholder="Search for responses" ng-model="search" required>
-		          <label for="search"><i class="material-icons">search</i></label>
-		          <i class="material-icons">close</i>
-		        </div>
-		      </form>
-		      <div class="fixed-action-btn">
-		      <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons" ng-click="responses_to_tsv()">cloud_download</i></a>
-		      </div>
-		      <div class="fixed-action-btn" style="margin-right: 75px;">
-		      <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modalupload" modal><i class="material-icons">cloud_upload</i></a>
-		      </div>
+        <div class="input-field">
+          <input id="search" type="search" placeholder="Search for responses" ng-model="search" required>
+          <label for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
+      <div class="fixed-action-btn">
+      <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons" ng-click="responses_to_tsv()">cloud_download</i></a>
+      </div>
+      <div class="fixed-action-btn" style="margin-right: 75px;">
+      <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modalupload" modal><i class="material-icons">cloud_upload</i></a>
+      </div>
 			<table style="width: 100%; font-size: 12px; border: 5px black;">
-		<tbody style="display: block; height: 600px; overflow: auto;">
-			<tr style="background-color: #6200b2; color:white; font-size: 15px">
-				<th>Time</th>
-				<th>Student ID</th>
-				<th>Grade</th>
-				<th>Mission</th>
-				<th>Mission Favorite</th>
-				<th>Easiest</th>
-				<th>Difficult</th>
-				<th>Improvements</th>
-				<th>Communication Score</th>
-				<th>Communication With Others</th>
-				<th>Trust Others</th>
-				<th>Trust Examples</th>
-				<th>Problem Solve Skills</th>
-				<th>Create Solution</th>
-				<th>Personality Traits</th>
-				<th>Teamwork Comp Rate</th>
-				<th>Job First Choice</th>
-				<th>Job First Choice Get</th>
-				<th>Job First Choice Learn</th>
-				<th>Job First Choice Learn Why</th>
-				<th>Job First Choice Other Roles</th>
-				<th>Job First Choice Skills</th>
-				<th>Job First Choice Pressure</th>
-				<th>Job First Choice Pressure Why</th>
-				<th>Job First Choice Critical</th>
-				<th>Job First Choice Critical Why</th>
-				<th>Job Second Choice Affect</th>
-				<th>Job Second Choice Affect Why</th>
-				<th>Job Second Choice Other Roles</th>
-				<th>Job Second Choice Skills</th>
-				<th>Job Second Choice Pressure</th>
-				<th>Job Second Choice Pressure Why</th>
-				<th>Job Second Choice Critical</th>
-				<th>Job Second Choice Critical Why</th>
-				<th>Examples Tie Class</th>
-				<th>Something New</th>
-			</tr>
+				<tbody style="display: block; height: 600px; overflow: auto;">
+					<tr style="background-color: #6200b2; color:white; font-size: 15px">
+						<th>Time</th>
+						<th>Student ID</th>
+						<th>Grade</th>
+						<th>Mission</th>
+						<th>Mission Favorite</th>
+						<th>Easiest</th>
+						<th>Difficult</th>
+						<th>Improvements</th>
+						<th>Communication Score</th>
+						<th>Communication With Others</th>
+						<th>Trust Others</th>
+						<th>Trust Examples</th>
+						<th>Problem Solve Skills</th>
+						<th>Create Solution</th>
+						<th>Personality Traits</th>
+						<th>Teamwork Comp Rate</th>
+						<th>Job First Choice</th>
+						<th>Job First Choice Get</th>
+						<th>Job First Choice Learn</th>
+						<th>Job First Choice Learn Why</th>
+						<th>Job First Choice Other Roles</th>
+						<th>Job First Choice Skills</th>
+						<th>Job First Choice Pressure</th>
+						<th>Job First Choice Pressure Why</th>
+						<th>Job First Choice Critical</th>
+						<th>Job First Choice Critical Why</th>
+						<th>Job Second Choice Affect</th>
+						<th>Job Second Choice Affect Why</th>
+						<th>Job Second Choice Other Roles</th>
+						<th>Job Second Choice Skills</th>
+						<th>Job Second Choice Pressure</th>
+						<th>Job Second Choice Pressure Why</th>
+						<th>Job Second Choice Critical</th>
+						<th>Job Second Choice Critical Why</th>
+						<th>Examples Tie Class</th>
+						<th>Something New</th>
+					</tr>
 
-			<tr ng-repeat="res in responses" ng-if="in_search(res);">
-				<td>{{res.time}}</td>
-				<td>{{res.student_id}}</td>
-				<td>{{res.grade_level}}</td>
-				<td>{{res.mission}}</td>
-				<td>{{res.mission_favorite}}</td>
-				<td>{{res.easiest}}</td>
-				<td>{{res.most_difficult}}</td>
-				<td>{{res.improve_suggestion}}</td>
-				<td>{{res.communicate_score}}</td>
-				<td>{{res.communicate_score_others}}</td>
-				<td>{{res.trust_others}}</td>
-				<td>{{res.trust_examples}}</td>
-				<td>{{res.problem_solve_skills}}</td>
-				<td>{{res.create_solution}}</td>
-				<td>{{res.personality_traits}}</td>
-				<td>{{res.teamwork_comp_rate}}</td>
-				<td>{{res.job_first_choice}}</td>
-				<td>{{res.job_first_choice_get}}</td>
-				<td>{{res.job_first_choice_learn}}</td>
-				<td>{{res.job_first_choice_learn_why}}</td>
-				<td>{{res.job_first_choice_other_roles}}</td>
-				<td>{{res.job_first_choice_skills}}</td>
-				<td>{{res.job_first_choice_pressure}}</td>
-				<td>{{res.job_first_choice_pressure_why}}</td>
-				<td>{{res.job_first_choice_critical}}</td>
-				<td>{{res.job_first_choice_critical_why}}</td>
-				<td>{{res.job_second_choice_affect}}</td>
-				<td>{{res.job_second_choice_affect_why}}</td>
-				<td>{{res.job_second_choice_other_roles}}</td>
-				<td>{{res.job_second_choice_skills}}</td>
-				<td>{{res.job_second_choice_pressure}}</td>
-				<td>{{res.job_second_choice_pressure_why}}</td>
-				<td>{{res.job_second_choice_critical}}</td>
-				<td>{{res.job_second_choice_critical_why}}</td>
-				<td>{{res.examples_tie_class}}</td>
-				<td>{{res.something_new}}</td>
-			</tr>
-		</tbody>
-		</table>
-		<div id="modalupload" class="modal">
+					<tr ng-repeat="res in responses" ng-if="in_search(res);">
+						<td>{{res.time}}</td>
+						<td>{{res.student_id}}</td>
+						<td>{{res.grade_level}}</td>
+						<td>{{res.mission}}</td>
+						<td>{{res.mission_favorite}}</td>
+						<td>{{res.easiest}}</td>
+						<td>{{res.most_difficult}}</td>
+						<td>{{res.improve_suggestion}}</td>
+						<td>{{res.communicate_score}}</td>
+						<td>{{res.communicate_score_others}}</td>
+						<td>{{res.trust_others}}</td>
+						<td>{{res.trust_examples}}</td>
+						<td>{{res.problem_solve_skills}}</td>
+						<td>{{res.create_solution}}</td>
+						<td>{{res.personality_traits}}</td>
+						<td>{{res.teamwork_comp_rate}}</td>
+						<td>{{res.job_first_choice}}</td>
+						<td>{{res.job_first_choice_get}}</td>
+						<td>{{res.job_first_choice_learn}}</td>
+						<td>{{res.job_first_choice_learn_why}}</td>
+						<td>{{res.job_first_choice_other_roles}}</td>
+						<td>{{res.job_first_choice_skills}}</td>
+						<td>{{res.job_first_choice_pressure}}</td>
+						<td>{{res.job_first_choice_pressure_why}}</td>
+						<td>{{res.job_first_choice_critical}}</td>
+						<td>{{res.job_first_choice_critical_why}}</td>
+						<td>{{res.job_second_choice_affect}}</td>
+						<td>{{res.job_second_choice_affect_why}}</td>
+						<td>{{res.job_second_choice_other_roles}}</td>
+						<td>{{res.job_second_choice_skills}}</td>
+						<td>{{res.job_second_choice_pressure}}</td>
+						<td>{{res.job_second_choice_pressure_why}}</td>
+						<td>{{res.job_second_choice_critical}}</td>
+						<td>{{res.job_second_choice_critical_why}}</td>
+						<td>{{res.examples_tie_class}}</td>
+						<td>{{res.something_new}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div id="modalupload" class="modal">
 		    <div class="modal-content">
 		      <h4>Upload Student Data</h4>
 		      <p>From the Google Sheets spreadsheet for post-student responses, navigate to 'Download As' and select Tab-separated values ('.tsv'). Upload that file here!</p>
 		    </div>
-			<div class="file-field input-field" style="padding-left: 29px; padding-right: 29px">
-	          <div class="btn blue">
-	            <span>Browse</span>
-	            <input id="csv_input" type="file" accept=".tsv">
-	          </div>
-	          <div class="file-path-wrapper">
-	            <input class="file-path validate" type="text">
-	          </div>
-	        </div>
+				<div class="file-field input-field" style="padding-left: 29px; padding-right: 29px">
+          <div class="btn blue">
+            <span>Browse</span>
+            <input id="csv_input" type="file" accept=".tsv">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+	       </div>
 		    <div class="modal-footer">
 		      <a class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="reload_responses()">Submit</a>
 		    </div>

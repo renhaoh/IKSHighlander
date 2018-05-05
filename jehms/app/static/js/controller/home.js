@@ -1,15 +1,10 @@
 var home_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootScope, $http) {
 	$scope.name = "home";
+	$scope.pre_count = 0;
+	$scope.post_count = 0;
+	$scope.total_count = 0;
 
-	// $scope.get_all_responses = function () {
-	// 	$http.get("/api/home/word_cloud").then(function(success) {
-	// 		$scope.responses = success.data;
-	// 	}, function(fail) {
-	// 		Materialize.toast('Error getting word cloud', 5000);
-	// 	});
-	// }
-
-	// $scope.get_all_responses();
+	// Gets count of pre survey responses, populates total_count
 	$scope.get_pre_count = function () {
 		$http.get("/api/pre/count").then(function(success) {
 			$scope.pre_count = parseInt(success.data[0]["count"]);
@@ -19,6 +14,7 @@ var home_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootScope, $h
 		});
 	}
 
+	// Gets count of post survey responses, then calls pre_count
 	$scope.get_post_count = function () {
 		$http.get("/api/post/count").then(function(success) {
 			$scope.post_count = parseInt(success.data[0]["count"]);

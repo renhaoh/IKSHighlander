@@ -4,7 +4,7 @@ var post = 'post_responses';
 var db = require('../../db');
 
 
-// Get all pre survey student responses
+// Get all post survey student responses
 router.get('/get_all', function(req, res, next) {
   return db.select('*')
   .from(post)
@@ -17,12 +17,16 @@ router.get('/get_all', function(req, res, next) {
   });
 });
 
+// Delete all existsing pre survey student responses
 router.delete('/clear', function(req, res, next) {
 	return db.del().from(post).then(function (count) {
 		return res.sendStatus(200);
 	});
 });
 
+
+// Google Sheets api has a weird ordering for the responses.
+// The ordering of the responses was changed to be more readable.
 router.post('/populate', function(req, res, next) {
 	var row = req.body.row;
 	var payload = {
@@ -41,7 +45,7 @@ router.post('/populate', function(req, res, next) {
 		problem_solve_skills: row[12],
 		create_solution: row[13],
 		personality_traits: row[14],
-		teamwork_comp_rate: row[33],
+		teamwork_comp_rate: row[33], // ugh
 		job_first_choice: row[15],
 		job_first_choice_get: row[16],
 
@@ -74,6 +78,7 @@ router.post('/populate', function(req, res, next) {
 			 });
 });
 
+// Get total number of responses in the post survey
 router.get('/count', function(req, res, next) {
   return db.count('id')
   .from(post)

@@ -2,6 +2,7 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 	$scope.name = "pre_survey";
 	$scope.responses = [];
 
+	// get all pre survey responses
 	$scope.get_all = function () {
 		$http.get("/api/pre/get_all").then(function(success) {
 			$scope.responses = success.data;
@@ -11,15 +12,7 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 	}
 	$scope.get_all();
 	
-	$scope.update_query = function () {
-		var new_responses = [];
-		for(var i=0; i<$scope.responses.length; i++) {
-			if($scope.responses[i].student_id.toString().includes($scope.search)) {
-				new_responses.push($scope.responses[i])
-			}
-		}
-		$scope.responses = new_responses;
-	}
+	// filter response if search query string does not appear in any field
 	$scope.in_search = function (response) {
 		if(typeof $scope.search !== "undefined") {
 			var keys = Object.keys(response);
@@ -38,11 +31,15 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 		} else return true;
 	}
 
+	// insert row into db
 	$scope.populate = function (r) {
+		// object wrapper
 		var payload = {
 			row: r
 		}
+
 		$http.post("/api/pre/populate", payload).then(function(success) {
+			// reflect new row
 			$scope.responses.push(success.data[0])
 		}, function(fail) {
 			Materialize.toast('Failed inserting data', 5000);
@@ -57,25 +54,22 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 			var row = raw[i].split("\t");
 			var newRow = [];
 
-			// newRow.push(row[0].replace("/\//", "-"));
-			newRow.push(row[0]);
-
-			var cleanID = row[1].replace(/[^0-9\.]+/g, "");
+			newRow.push(row[0]); // date
+			var cleanID = row[1].replace(/[^0-9\.]+/g, ""); // id
 			if(cleanID != "") {
 				newRow.push(parseInt(cleanID));
 			} else {
+				// can't get readable id, convert to 0
+				// do not use for student lookup
 				newRow.push(0);
 			}
-
-			newRow.push(parseInt(row[2][0]));
-			newRow.push(row[3]);
-			newRow.push(parseInt(row[4]));
-
-			for(var c=5; c<10; c++) {
+			newRow.push(parseInt(row[2][0])); // read int out of grade
+			newRow.push(row[3]); // mission
+			newRow.push(parseInt(row[4])); // pre mission score
+			for(var c=5; c<10; c++) { // why - excited
 				newRow.push(row[c]);
 			}
-
-			if (row[10].toLowerCase() == "yes") newRow.push(true); 
+			if (row[10].toLowerCase() == "yes") newRow.push(true); // jitters
 			else newRow.push(false);
 
 			res.push(newRow);
@@ -85,6 +79,7 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 		return res;
 	}
 
+	// clear table then repopulate with new tsv
 	$scope.submit_res = function (responses) {
 		$http.delete("/api/pre/clear");
 		$scope.responses = [];
@@ -92,6 +87,7 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 		$scope.get_all();
 	}
 
+	// read from tsv
 	$scope.reload_responses = function () {
 		var input, file, fr, result;
 		input = document.getElementById('csv_input');
@@ -103,10 +99,11 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 		fr.readAsText(file);
 	}
 
+	// stored data -> tsv
 	$scope.responses_to_tsv = function () {
 		var rs = $scope.responses;
 		var tsv = "time\tstudent_id\tgrade_level\tmission\tpre_mission_score\tpre_job_role\tpre_job_why\tpre_job_skills\tpre_personality\tpre_excited\tpre_mission_jitters\n";
-
+		// append responses to tsv
 		for(var row=0; row<rs.length; row++) {
 			var keys = Object.keys(rs[row]);
 			console.log(keys);
@@ -122,6 +119,7 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 			tsv += "\n";
 		}
 		var encodedUri = encodeURIComponent(tsv);
+		// encode as tsv and attach file
 		window.location.href = "data:text/tab-separated-values," + encodedUri;
 	}
 }];

@@ -17,23 +17,15 @@ router.get('/get_all', function(req, res, next) {
   });
 });
 
+// Delete all entries
 router.delete('/clear', function(req, res, next) {
 	return db.del().from(pre).then(function (count) {
 		return res.sendStatus(200);
 	});
 });
 
-var preSchema = {
-	type: 'object',
-	additionalProperties: false,
-	properties: {
-		rows: {
-		  type: 'array',
-		  required: true,
-		}
-	}
-}
 
+// For a given row, extract elements into object to insert into DB
 router.post('/populate', function(req, res, next) {
 	var row = req.body.row;
 	var payload = {
@@ -57,11 +49,12 @@ router.post('/populate', function(req, res, next) {
 			 });
 });
 
+
+// Get count of total responses in pre survey
 router.get('/count', function(req, res, next) {
   return db.count('id')
   .from(pre)
   .then(function(responses) {
-  	console.log(responses);
     return res.send(responses);
   })
   .catch(function(err) {

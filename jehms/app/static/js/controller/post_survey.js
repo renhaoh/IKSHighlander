@@ -69,7 +69,7 @@ var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSc
 				newRow.push(parseInt(cleanID));
 			} else {
 				// can't get readable id, convert to 0
-				// do not use for student lookup
+				// note: do not use for student lookup
 				newRow.push(0);
 			}
 			newRow.push(parseInt(row[2][0])); // read int out of grade
@@ -116,16 +116,16 @@ var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSc
 		$http.delete("/api/post/clear");
 		$scope.responses = [];
 		$scope.clean = $scope.parse_pop(responses);
-		$scope.get_all();
+		$scope.get_all(); // reset responses to reflect new data
 	}
 
 	// read from tsv
 	$scope.reload_responses = function () {
 		var input, file, fr, result;
 		input = document.getElementById('csv_input');
-		file = input.files[0]
+		file = input.files[0] // extract from FileList
 		fr = new FileReader();
-		fr.onload = function(e) {
+		fr.onload = function(e) { // once done with reading, submit
 			$scope.submit_res(e.target.result.split("\n"));
 		}
 		fr.readAsText(file);

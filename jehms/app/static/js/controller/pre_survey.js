@@ -91,9 +91,9 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 	$scope.reload_responses = function () {
 		var input, file, fr, result;
 		input = document.getElementById('csv_input');
-		file = input.files[0]
+		file = input.files[0] // extract from FileList
 		fr = new FileReader();
-		fr.onload = function(e) {
+		fr.onload = function(e) { // once done with reading, submit
 			$scope.submit_res(e.target.result.split("\n"));
 		}
 		fr.readAsText(file);
@@ -106,7 +106,6 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 		// append responses to tsv
 		for(var row=0; row<rs.length; row++) {
 			var keys = Object.keys(rs[row]);
-			console.log(keys);
 			for(var i=0; i<(keys.length-1); i++) {
 				var key = keys[i];
 				if(typeof rs[row][key] !== "string") {

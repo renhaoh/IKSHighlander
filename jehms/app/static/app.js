@@ -6,8 +6,6 @@ var app = angular.module('app', [
   'ui.materialize'
 ]);
 
-// Register global methods for authentication check
-app.factory("$globs", globs);
 
 // Register controllers
 app.controller("login_ctl", login_ctl);

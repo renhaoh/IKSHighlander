@@ -1,3 +1,4 @@
+# Framework from https://developers.google.com/sheets/api/quickstart/python
 
 from __future__ import print_function
 import httplib2
@@ -52,11 +53,9 @@ def get_credentials():
         print('Storing credentials to ' + credential_path)
     return credentials
 
-# def fixEncode(row):
-#     res = []
-#     for s in row:
 
-
+# First iteration of parsing from sheets api
+# DEPRECATED - see javascript implementation in controllers
 def preParse(raw):
     fieldHeads = raw[0]
     new = []
@@ -86,6 +85,7 @@ def preParse(raw):
         new.append(newRow)
     return new
 
+# DEPRECATED - see above function
 def postParse(raw):
     fieldHeads = raw[0]
     new = []
@@ -146,6 +146,7 @@ def main():
         cleanPre = preParse(copy.deepcopy(preValues))
         cleanPost = postParse(copy.deepcopy(postValues))
 
+        # create new csv's if not there
         with open("pre.csv", "w", encoding="utf-8") as f:
             writer = csv.writer(f)
             writer.writerows(cleanPre)

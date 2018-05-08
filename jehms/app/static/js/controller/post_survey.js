@@ -1,6 +1,6 @@
 var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootScope, $http) {
 	$scope.name = "post_survey";
-	$scope.responses = [];
+	$scope.responses = []; // holds all rows of data
 
 	// Get all post survey responses
 	$scope.get_all = function () {
@@ -28,19 +28,17 @@ var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSc
 				}
 			}
 			return false;
-		} else return true;
+		} else return true; // no search to filter by
 	}
 
 	// Insert row into DB
 	$scope.populate = function (r) {
-		// make object wrapper
-		var payload = {
+		var payload = { // make object wrapper
 			row: r
 		}
 
 		$http.post("/api/post/populate", payload).then(function(success) {
-			// reflect new row
-			$scope.responses.push(success.data[0])
+			$scope.responses.push(success.data[0]) // reflect new row
 		}, function(fail) {
 			Materialize.toast('Failed inserting data', 5000);
 		});
@@ -54,7 +52,7 @@ var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSc
 		else return false;
 	}
 
-	// From Google Sheet TSV to array of data
+	// From Google Sheets TSV to array of data
 	$scope.parse_pop = function (raw) {
 		var res = [];
 		for(var i=1; i<raw.length; i++) {
@@ -105,9 +103,8 @@ var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSc
 			newRow.push(row[35]); // second pressure why
 
 			res.push(newRow);
-			$scope.populate(newRow);
+			$scope.populate(newRow); // populate db with new row
 		}
-		
 		return res;
 	}
 

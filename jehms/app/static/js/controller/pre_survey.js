@@ -1,6 +1,6 @@
 var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootScope, $http) {
 	$scope.name = "pre_survey";
-	$scope.responses = [];
+	$scope.responses = []; // holds all rows of data
 
 	// get all pre survey responses
 	$scope.get_all = function () {
@@ -28,24 +28,23 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 				}
 			}
 			return false;
-		} else return true;
+		} else return true; // no search to filter by
 	}
 
 	// insert row into db
 	$scope.populate = function (r) {
-		// object wrapper
-		var payload = {
+		var payload = { // object wrapper
 			row: r
 		}
 
 		$http.post("/api/pre/populate", payload).then(function(success) {
-			// reflect new row
-			$scope.responses.push(success.data[0])
+			$scope.responses.push(success.data[0]) // reflect new row
 		}, function(fail) {
 			Materialize.toast('Failed inserting data', 5000);
 		});
 	}
 
+	// From Google Sheets TSV to array of data
 	$scope.parse_pop = function (raw) {
 		var res = [];
 		for(var i=1; i<raw.length; i++) {
@@ -73,9 +72,8 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 			else newRow.push(false);
 
 			res.push(newRow);
-			$scope.populate(newRow);
+			$scope.populate(newRow); // populate db with new row
 		}
-		
 		return res;
 	}
 
@@ -84,7 +82,7 @@ var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootSco
 		$http.delete("/api/pre/clear");
 		$scope.responses = [];
 		$scope.clean = $scope.parse_pop(responses);
-		$scope.get_all();
+		$scope.get_all(); // reset responses to reflect new data
 	}
 
 	// read from tsv

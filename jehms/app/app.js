@@ -28,6 +28,8 @@ var sessionMiddleware = session({
 
 app.use(sessionMiddleware);
 app.use(bodyParser.json());
+
+// establish routes for backend
 app.use('/', express.static('./static'));
 app.use('/api/home', require('./components/home').routes);
 app.use('/api/pre', require('./components/pre').routes);

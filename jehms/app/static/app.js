@@ -6,7 +6,6 @@ var app = angular.module('app', [
   'ui.materialize'
 ]);
 
-
 // Register controllers
 app.controller("login_ctl", login_ctl);
 app.controller("home_ctl", home_ctl);
@@ -35,5 +34,5 @@ app.config(function($routeProvider) {
   $routeProvider.when("/pre_survey", {
       templateUrl: "html/pre_survey.html",
       controller: "pre_survey_ctl"
-  }).otherwise({ redirectTo: '/'});
+  }).otherwise({ redirectTo: '/'}); // catch other routes, reroute to login page
 });

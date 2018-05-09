@@ -1,6 +1,8 @@
 var post_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootScope, $http) {
 	$scope.name = "post_survey";
 	$scope.responses = []; // holds all rows of data
+	$scope.sort_type = ''; // field to sort by
+	$scope.sort_reverse = false; // reverse sort
 
 	// Get all post survey responses
 	$scope.get_all = function () {

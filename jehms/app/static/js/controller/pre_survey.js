@@ -1,6 +1,8 @@
 var pre_survey_ctl = ["$scope", "$rootScope", "$http", function($scope, $rootScope, $http) {
 	$scope.name = "pre_survey";
 	$scope.responses = []; // holds all rows of data
+	$scope.sort_type = ''; // field to sort by
+	$scope.sort_reverse = false; // reverse sort
 
 	// get all pre survey responses
 	$scope.get_all = function () {

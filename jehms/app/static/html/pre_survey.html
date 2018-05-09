@@ -23,20 +23,45 @@ tr:hover {background-color: #fffcef}
 			<table style="width: 95%; font-size: 12px; border: 5px black;">
 				<tbody style="display: block; height: 600px; overflow: auto;">
 					<tr style="background-color: #6200b2; color:white; font-size: 15px;">
-					<th>Time</th>
-					<th>Student ID</th>
-					<th>Grade</th>
-					<th>Mission</th>
-					<th>Pre Learning Score</th>
-					<th>First Choice Job</th>
-					<th>First Choice Reason</th>
-					<th>Skills</th>
-					<th>Personalities</th>
-					<th>Excited</th>
-					<th>Jitters</th>
+						<th>Time</th>
+						<th>
+							<a href="/#/pre_survey" ng-click="sort_type = 'student_id'; sort_reverse = !(sort_reverse);">Student ID
+								<span ng-show="sort_type == 'student_id' && sort_reverse" class="material-icons">expand_more</span>
+								<span ng-show="sort_type == 'student_id' && !(sort_reverse)" class="material-icons">expand_less</span>
+							</a>
+						</th>
+						<th>
+							<a href="/#/pre_survey" ng-click="sort_type = 'grade_level'; sort_reverse = !(sort_reverse)">Grade
+								<span ng-show="sort_type == 'grade_level' && sort_reverse" class="material-icons">expand_more</span>
+								<span ng-show="sort_type == 'grade_level' && !(sort_reverse)" class="material-icons">expand_less</span>
+							</a>
+						</th>
+						<th>
+							<a href="/#/pre_survey" ng-click="sort_type = 'mission'; sort_reverse = !(sort_reverse)">Mission
+								<span ng-show="sort_type == 'mission' && sort_reverse" class="material-icons">expand_more</span>
+								<span ng-show="sort_type == 'mission' && !(sort_reverse)" class="material-icons">expand_less</span>
+							</a>
+						</th>
+						<th>Pre Learning Score</th>
+						<th>First Choice Job</th>
+						<th>First Choice Reason</th>
+						<th>Skills</th>
+						<th>Personalities</th>
+						<th>
+							<a href="/#/pre_survey" ng-click="sort_type = 'pre_mission_score'; sort_reverse = !(sort_reverse)">Excited
+								<span ng-show="sort_type == 'pre_mission_score' && sort_reverse" class="material-icons">expand_more</span>
+								<span ng-show="sort_type == 'pre_mission_score' && !(sort_reverse)" class="material-icons">expand_less</span>
+							</a>
+						</th>
+						<th>
+							<a href="/#/pre_survey" ng-click="sort_type = 'pre_mission_jitters'; sort_reverse = !(sort_reverse)">Jitters
+								<span ng-show="sort_type == 'pre_mission_jitters' && sort_reverse" class="material-icons">expand_more</span>
+								<span ng-show="sort_type == 'pre_mission_jitters' && !(sort_reverse)" class="material-icons">expand_less</span>
+							</a>
+						</th>
 					</tr>
 
-					<tr ng-repeat="res in responses" ng-if="in_search(res);">
+					<tr ng-repeat="res in responses | orderBy:sort_type:sort_reverse" ng-if="in_search(res);">
 						<td>{{res.time}}</td>
 						<td>{{res.student_id}}</td>
 						<td>{{res.grade_level}}</td>
@@ -45,9 +70,9 @@ tr:hover {background-color: #fffcef}
 						<td>{{res.pre_job_role}}</td>
 						<td>{{res.pre_job_skills}}</td>
 						<td>{{res.pre_job_why}}</td>
-						<td>{{res.pre_mission_jitters}}</td>
-						<td>{{res.pre_mission_score}}</td>
 						<td>{{res.pre_personality}}</td>
+						<td>{{res.pre_mission_score}}</td>
+						<td>{{res.pre_mission_jitters}}</td>
 					</tr>
 				</tbody>
 			</table>
